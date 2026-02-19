@@ -2,18 +2,21 @@
 
 ## Overview
 
-This project documents the deployment of a hybrid Active Directory environment in Microsoft Azure and the operational tasks performed within it. The goal of the lab is to understand how identity, authentication, authorization, and administrative delegation function inside a domain environment.
+This project documents the deployment of a hybrid Active Directory environment in Microsoft Azure and the operational tasks performed within it.
+The objective is to understand how identity, authentication, authorization, and delegated administration operate inside a centralized domain.
 
-This environment will serve as the foundation for future identity monitoring and detection exercises.
+This environment serves as the foundation for future identity monitoring and detection engineering exercises.
 
 ---
 
 ## Attribution
-This lab was originally inspired by an Active Directory deployment guide by
-[Jake Hulberg](https://www.jakehulberg.dev/).
-I followed the core infrastructure setup and will continue to extended the environment with additional administrative and operational tasks to better understand real-world usage.
 
-All implementation steps, documentation, troubleshooting, and validation in this repository reflect my own execution and learning process.
+This lab was inspired by an Active Directory deployment guide by
+[Jake Hulberg](https://www.jakehulberg.dev/).
+
+I followed the core infrastructure setup and then extended the environment with additional administrative and operational tasks to better understand how Active Directory is used in real enterprise environments.
+
+All implementation steps, troubleshooting, validation, and documentation in this repository reflect my own execution and learning process.
 
 ---
 
@@ -43,17 +46,63 @@ All implementation steps, documentation, troubleshooting, and validation in this
 * Authentication vs Authorization
 * Role-based access control
 * Delegated administration
-* Policy enforcement
+* Policy enforcement via Group Policy
 * Centralized identity management
 
 ---
 
-## Validation
+## Implementation Evidence
 
-Screenshots and verification steps are included in the `/Validation` directory demonstrating successful authentication, policy application, and permission enforcement.
+### Domain Integration
+
+The workstation successfully joined the domain and authenticated using centralized identity services.
+
+![Domain Join](Validation/domain-join.png)
+
+---
+
+### Automated Identity Provisioning
+
+Users were created and assigned groups using PowerShell to simulate repeatable administrative workflows.
+
+![User Provisioning](Identity-Management/user-provisioning.png)
+![Group Assignment](Identity-Management/group-assignment.png)
+
+---
+
+### Delegated Administration
+
+Helpdesk users were granted limited administrative privileges (password reset) without domain administrator rights.
+
+![Delegation](Identity-Management/helpdesk-delegation.png)
+
+---
+
+### Policy Enforcement
+
+Domain password policies and logon scripts were delivered through Group Policy and SYSVOL.
+
+![Password Policy](Group-Policy/password-policy.png)
+![Logon Script](Group-Policy/logon-script.png)
+
+---
+
+### Organizational Structure
+
+The workstation was placed into a departmental OU to allow scoped policy application.
+
+![OU Placement](Deployment/ou-placement.png)
+
+---
+
+### Authentication Context Validation
+
+The user session confirms domain group membership is applied at logon.
+
+![User Context](Validation/domain-user-context.png)
 
 ---
 
 ## Next Phase
 
-This lab will be expanded into a security-focused environment to simulate identity-based attack scenarios and detection engineering workflows.
+This environment will now be expanded into a security-focused lab used to simulate identity-based attack scenarios and build detection logic around authentication and authorization events.
